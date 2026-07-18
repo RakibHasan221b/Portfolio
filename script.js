@@ -97,6 +97,38 @@ onScroll();
   sections.forEach(s => obs.observe(s));
 })();
 
+// ===== Hero stat count-up (fires once, on scroll into view) =====
+(function statCountUp() {
+  const el = document.querySelector('[data-countup]');
+  if (!el || reduced || !('IntersectionObserver' in window)) return;
+  const target = parseInt(el.dataset.countup, 10);
+  const suffix = el.dataset.suffix || '';
+  const duration = 900;
+  let started = false;
+
+  function animate() {
+    if (started) return;
+    started = true;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('en-US') + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString('en-US') + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.6 });
+  obs.observe(el);
+})();
+
 // ===== Copy email icon with feedback =====
 (function copyEmail() {
   const btn = document.getElementById('copyBtn');
