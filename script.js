@@ -8,15 +8,19 @@ const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matc
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// ===== Top progress hairline =====
+// ===== Top progress hairline + nav scrolled state =====
 const progress = document.getElementById('progress');
-function updateProgress() {
-  if (!progress) return;
-  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  progress.style.width = (scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0) + '%';
+const nav = document.getElementById('nav');
+function onScroll() {
+  const y = window.scrollY;
+  if (progress) {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (scrollable > 0 ? (y / scrollable) * 100 : 0) + '%';
+  }
+  if (nav) nav.classList.toggle('is-scrolled', y > 20);
 }
-window.addEventListener('scroll', updateProgress, { passive: true });
-updateProgress();
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 // ===== Masked word reveals on section titles =====
 (function maskTitles() {
@@ -93,19 +97,29 @@ updateProgress();
   sections.forEach(s => obs.observe(s));
 })();
 
-// ===== Copy email with feedback =====
+// ===== Copy email icon with feedback =====
 (function copyEmail() {
   const btn = document.getElementById('copyBtn');
+  const flash = document.getElementById('copiedFlash');
   if (!btn) return;
-  const original = btn.textContent;
+  let timer;
   btn.addEventListener('click', async () => {
+    let ok = true;
     try {
       await navigator.clipboard.writeText(btn.dataset.email);
-      btn.textContent = 'Copied ✓';
-    } catch (e) {
-      btn.textContent = 'Ctrl/Cmd+C: ' + btn.dataset.email;
+    } catch (e) { ok = false; }
+    btn.classList.add('is-copied');
+    btn.setAttribute('aria-label', ok ? 'Email address copied' : 'Copy failed');
+    if (flash) {
+      flash.textContent = ok ? 'Copied to clipboard' : ('Press Ctrl/Cmd+C: ' + btn.dataset.email);
+      flash.classList.add('is-on');
     }
-    setTimeout(() => { btn.textContent = original; }, 1600);
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      btn.classList.remove('is-copied');
+      btn.setAttribute('aria-label', 'Copy email address');
+      if (flash) flash.classList.remove('is-on');
+    }, 1800);
   });
 })();
 
