@@ -8,15 +8,19 @@ const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matc
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// ===== Top progress hairline =====
+// ===== Top progress hairline + nav scrolled state =====
 const progress = document.getElementById('progress');
-function updateProgress() {
-  if (!progress) return;
-  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  progress.style.width = (scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0) + '%';
+const nav = document.getElementById('nav');
+function onScroll() {
+  const y = window.scrollY;
+  if (progress) {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (scrollable > 0 ? (y / scrollable) * 100 : 0) + '%';
+  }
+  if (nav) nav.classList.toggle('is-scrolled', y > 20);
 }
-window.addEventListener('scroll', updateProgress, { passive: true });
-updateProgress();
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 // ===== Masked word reveals on section titles =====
 (function maskTitles() {
@@ -93,19 +97,61 @@ updateProgress();
   sections.forEach(s => obs.observe(s));
 })();
 
-// ===== Copy email with feedback =====
+// ===== Hero stat count-up (fires once, on scroll into view) =====
+(function statCountUp() {
+  const el = document.querySelector('[data-countup]');
+  if (!el || reduced || !('IntersectionObserver' in window)) return;
+  const target = parseInt(el.dataset.countup, 10);
+  const suffix = el.dataset.suffix || '';
+  const duration = 900;
+  let started = false;
+
+  function animate() {
+    if (started) return;
+    started = true;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val.toLocaleString('en-US') + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString('en-US') + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.6 });
+  obs.observe(el);
+})();
+
+// ===== Copy email icon with feedback =====
 (function copyEmail() {
   const btn = document.getElementById('copyBtn');
+  const flash = document.getElementById('copiedFlash');
   if (!btn) return;
-  const original = btn.textContent;
+  let timer;
   btn.addEventListener('click', async () => {
+    let ok = true;
     try {
       await navigator.clipboard.writeText(btn.dataset.email);
-      btn.textContent = 'Copied ✓';
-    } catch (e) {
-      btn.textContent = 'Ctrl/Cmd+C: ' + btn.dataset.email;
+    } catch (e) { ok = false; }
+    btn.classList.add('is-copied');
+    btn.setAttribute('aria-label', ok ? 'Email address copied' : 'Copy failed');
+    if (flash) {
+      flash.textContent = ok ? 'Copied to clipboard' : ('Press Ctrl/Cmd+C: ' + btn.dataset.email);
+      flash.classList.add('is-on');
     }
-    setTimeout(() => { btn.textContent = original; }, 1600);
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      btn.classList.remove('is-copied');
+      btn.setAttribute('aria-label', 'Copy email address');
+      if (flash) flash.classList.remove('is-on');
+    }, 1800);
   });
 })();
 
