@@ -78,14 +78,14 @@
       </div>
 
       <div class="work-index">
-        <a class="wrow reveal" href="https://ai-travel-assistant-dk.streamlit.app/" target="_blank" rel="noopener">
+        <a class="wrow reveal" href="#case-travel">
           <span class="wrow__num mono">01</span>
           <span class="wrow__main">
             <span class="wrow__title">AI Travel Assistant Denmark</span>
             <span class="wrow__desc">Full-stack travel-planning platform: RAG pipeline, CrewAI multi-agent system and an XGBoost quality model, live end-to-end</span>
           </span>
           <span class="wrow__tags mono">FastAPI &middot; CrewAI &middot; RAG</span>
-          <span class="wrow__arrow" aria-hidden="true">&#8599;</span>
+          <span class="wrow__arrow" aria-hidden="true">&darr;</span>
         </a>
         <a class="wrow reveal" href="#casestudy">
           <span class="wrow__num mono">02</span>
@@ -96,14 +96,14 @@
           <span class="wrow__tags mono">Python &middot; GPT-4o &middot; Streamlit</span>
           <span class="wrow__arrow" aria-hidden="true">&darr;</span>
         </a>
-        <a class="wrow reveal" href="https://github.com/RakibHasan221b/Karma-Prediction" target="_blank" rel="noopener">
+        <a class="wrow reveal" href="#case-karma">
           <span class="wrow__num mono">03</span>
           <span class="wrow__main">
             <span class="wrow__title">Restaurant Guest Forecasting</span>
             <span class="wrow__desc">Daily guest predictions for a working restaurant from history, weather and events</span>
           </span>
           <span class="wrow__tags mono">Scikit-learn &middot; Pandas</span>
-          <span class="wrow__arrow" aria-hidden="true">&#8599;</span>
+          <span class="wrow__arrow" aria-hidden="true">&darr;</span>
         </a>
         <a class="wrow reveal" href="https://danish-tax-calculator-app-cazpqbvrrs6h7uai2xpfvd.streamlit.app/" target="_blank" rel="noopener">
           <span class="wrow__num mono">04</span>
@@ -134,11 +134,59 @@
     </div>
   </section>
 
-  <!-- CASE STUDY (noir chapter) -->
-  <section class="chapter-noir case" id="casestudy">
+  <!-- CASE STUDY: AI TRAVEL ASSISTANT (noir chapter) -->
+  <section class="chapter-noir case" id="case-travel">
     <div class="container">
       <div class="sec-head sec-head--noir" data-num="02">
-        <span class="kicker mono">02 &middot; Case study &middot; Master's thesis</span>
+        <span class="kicker mono">02 &middot; Case study &middot; Personal project</span>
+        <h2 class="sec-title">Planning a real trip, not a demo.</h2>
+      </div>
+      <p class="case__intro reveal">
+        A trip-planning tool is only useful if it's honest about what it knows. I built one
+        that reasons over real places and real weather, with a model that reports its own
+        accuracy instead of hiding it.
+      </p>
+      <div class="case__grid">
+        <div class="case__rows">
+          <div class="crow reveal">
+            <span class="crow__label mono">Problem</span>
+            <p>Trip-planning tools either hand you generic listicles or hallucinate details with no way to check them. There's no single tool that reasons over real place data, live conditions, and an honestly-reported model.</p>
+          </div>
+          <div class="crow reveal">
+            <span class="crow__label mono">Approach</span>
+            <p>A full-stack platform: FastAPI backend, PostgreSQL/pgvector database, and a Streamlit frontend, live on Render and Streamlit Community Cloud. A RAG pipeline embeds and semantically searches real Copenhagen places sourced from OpenStreetMap, with GPT-4o-grounded summaries for the ones with enough source text. A CrewAI multi-agent crew (Place Scout, Conditions Analyst, Concierge), powered by Groq's Llama 3.3, plans a real recommendation grounded in live weather, never inventing a fact it can't cite.</p>
+          </div>
+          <div class="crow reveal">
+            <span class="crow__label mono">Result</span>
+            <p>An Optuna-tuned XGBoost quality-scoring model puts 83% of predictions within &plusmn;10 points of the true score (RMSE 8.76); a companion weather-aware visit-forecast model, evaluated on a chronological split, reaches 97% within &plusmn;10 points (RMSE 3.39, R&sup2; 0.98). Both tracked and reproducible in MLflow, not cherry-picked.</p>
+          </div>
+          <div class="crow reveal">
+            <span class="crow__label mono">Stack</span>
+            <p class="mono case__stack">FastAPI &middot; PostgreSQL/pgvector &middot; RAG &middot; CrewAI &middot; Groq &middot; XGBoost &middot; Optuna &middot; MLflow</p>
+          </div>
+          <div class="case__cta reveal">
+            <a class="btn btn--solid-ivory" href="https://ai-travel-assistant-dk.streamlit.app/" target="_blank" rel="noopener">Open live app &#8599;</a>
+            <a class="btn btn--line-ivory" href="https://github.com/RakibHasan221b/AI-Travel-Assistant-Denmark" target="_blank" rel="noopener">GitHub &#8599;</a>
+          </div>
+        </div>
+        <figure class="case__fig reveal">
+          <a class="plate plate--noir" href="https://ai-travel-assistant-dk.streamlit.app/" target="_blank" rel="noopener" aria-label="Open the live AI Travel Assistant Denmark">
+            <img src="travel-app.jpg" alt="Screenshot of the live AI Travel Assistant Denmark stats dashboard" loading="lazy" />
+          </a>
+          <figcaption class="mono">Fig. 02 - Live application, stats dashboard</figcaption>
+          <div class="case__metrics mono">
+            <span>1,896 places</span><span>8 vibe clusters</span><span>83% within &plusmn;10pts</span>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY: THESIS (noir chapter) -->
+  <section class="chapter-noir case" id="casestudy">
+    <div class="container">
+      <div class="sec-head sec-head--noir" data-num="03">
+        <span class="kicker mono">03 &middot; Case study &middot; Master's thesis</span>
         <h2 class="sec-title">Reading bias at scale.</h2>
       </div>
       <p class="case__intro reveal">
@@ -173,7 +221,7 @@
           <a class="plate plate--noir" href="https://media-bias-detector1.streamlit.app/" target="_blank" rel="noopener" aria-label="Open the live News Bias Analysis System">
             <img src="thesis-app.jpg" alt="Screenshot of the live News Bias Analysis System" loading="lazy" />
           </a>
-          <figcaption class="mono">Fig. 02 - Live application, updating daily</figcaption>
+          <figcaption class="mono">Fig. 03 - Live application, updating daily</figcaption>
           <div class="case__metrics mono">
             <span>6,500+ articles</span><span>4 outlets</span><span>Daily &middot; automated</span>
           </div>
@@ -182,11 +230,48 @@
     </div>
   </section>
 
+  <!-- CASE STUDY: KARMA PREDICTION (noir chapter, no live app) -->
+  <section class="chapter-noir case" id="case-karma">
+    <div class="container">
+      <div class="sec-head sec-head--noir" data-num="04">
+        <span class="kicker mono">04 &middot; Case study &middot; Karma Sushi Aalborg</span>
+        <h2 class="sec-title">Guest counts a kitchen can plan around.</h2>
+      </div>
+      <p class="case__intro reveal">
+        A working restaurant doesn't need a research paper, it needs a number it can trust
+        before the shift starts.
+      </p>
+      <div class="case__grid case__grid--single">
+        <div class="case__rows">
+          <div class="crow reveal">
+            <span class="crow__label mono">Problem</span>
+            <p>Karma Sushi Aalborg staffed and bought ingredients on gut feel, with no structured way to anticipate a slow Tuesday or a packed Friday.</p>
+          </div>
+          <div class="crow reveal">
+            <span class="crow__label mono">Approach</span>
+            <p>Owned the full workflow solo: cleaning historical guest counts, EDA, feature engineering from weather and local-event data, modelling and evaluation with Python, Pandas and Scikit-learn.</p>
+          </div>
+          <div class="crow reveal">
+            <span class="crow__label mono">Result</span>
+            <p>Forecasting models that gave the kitchen a number to plan staffing and purchasing around, directly informing day-to-day decisions instead of guesswork.</p>
+          </div>
+          <div class="crow reveal">
+            <span class="crow__label mono">Stack</span>
+            <p class="mono case__stack">Python &middot; Pandas &middot; Scikit-learn</p>
+          </div>
+          <div class="case__cta reveal">
+            <a class="btn btn--line-ivory" href="https://github.com/RakibHasan221b/Karma-Prediction" target="_blank" rel="noopener">GitHub &#8599;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ABOUT (paper) -->
   <section class="section" id="about">
     <div class="container">
-      <div class="sec-head" data-num="03">
-        <span class="kicker mono">03 &middot; About</span>
+      <div class="sec-head" data-num="05">
+        <span class="kicker mono">05 &middot; About</span>
         <h2 class="sec-title">Analyst's discipline, builder's instinct.</h2>
       </div>
       <div class="about__grid">
@@ -248,8 +333,8 @@
   <!-- SKILLS (noir) -->
   <section class="section chapter-noir" id="skills">
     <div class="container">
-      <div class="sec-head sec-head--noir" data-num="04">
-        <span class="kicker mono">04 &middot; Toolkit</span>
+      <div class="sec-head sec-head--noir" data-num="06">
+        <span class="kicker mono">06 &middot; Toolkit</span>
         <h2 class="sec-title">What I work with.</h2>
       </div>
       <div class="skills">
@@ -261,7 +346,7 @@
         <div class="skill reveal">
           <span class="skill__label mono">Machine learning &amp; AI</span>
           <p class="skill__desc">Classical ML, forecasting, and LLM workflows that reach production.</p>
-          <p class="skill__chips mono">Scikit-learn &middot; XGBoost &middot; Time-series &middot; NLP &middot; RAG &middot; LangChain &middot; Ollama &middot; Groq &middot; Prompting &middot; CrewAI &middot; Agentic systems &middot; MLflow &middot; Optuna</p>
+          <p class="skill__chips mono">Scikit-learn &middot; XGBoost &middot; LightGBM &middot; Time-series &middot; NLP &middot; RAG &middot; LangChain &middot; Ollama &middot; Groq &middot; Prompting &middot; CrewAI &middot; Agentic systems &middot; MLflow &middot; Optuna &middot; PyTorch &middot; TensorFlow &middot; Docker</p>
         </div>
         <div class="skill reveal">
           <span class="skill__label mono">Visualisation &amp; reporting</span>
@@ -271,7 +356,7 @@
         <div class="skill reveal">
           <span class="skill__label mono">Collection &amp; automation</span>
           <p class="skill__desc">Scrapers and CI that keep datasets alive without me touching them.</p>
-          <p class="skill__chips mono">Requests &middot; BeautifulSoup &middot; Playwright &middot; trafilatura &middot; GitHub Actions</p>
+          <p class="skill__chips mono">Requests &middot; BeautifulSoup &middot; Playwright &middot; trafilatura &middot; GitHub Actions &middot; Render deployment</p>
         </div>
       </div>
     </div>
@@ -280,8 +365,8 @@
   <!-- EDUCATION (paper) -->
   <section class="section" id="education">
     <div class="container">
-      <div class="sec-head" data-num="05">
-        <span class="kicker mono">05 &middot; Education</span>
+      <div class="sec-head" data-num="07">
+        <span class="kicker mono">07 &middot; Education</span>
         <h2 class="sec-title">Academic background.</h2>
       </div>
       <div class="xp">
@@ -306,8 +391,8 @@
   <!-- EXPERIENCE (noir) -->
   <section class="section chapter-noir" id="experience">
     <div class="container">
-      <div class="sec-head sec-head--noir" data-num="06">
-        <span class="kicker mono">06 &middot; Experience</span>
+      <div class="sec-head sec-head--noir" data-num="08">
+        <span class="kicker mono">08 &middot; Experience</span>
         <h2 class="sec-title">Where I've worked.</h2>
       </div>
       <div class="xp">
@@ -346,8 +431,8 @@
   <!-- BEYOND (paper) -->
   <section class="section" id="beyond">
     <div class="container">
-      <div class="sec-head" data-num="07">
-        <span class="kicker mono">07 &middot; Beyond the CV</span>
+      <div class="sec-head" data-num="09">
+        <span class="kicker mono">09 &middot; Beyond the CV</span>
         <h2 class="sec-title">Outside the notebook.</h2>
       </div>
       <div class="beyond">
@@ -412,7 +497,7 @@
   <!-- CONTACT (noir chapter) -->
   <section class="chapter-noir contact" id="contact">
     <div class="container">
-      <span class="kicker mono kicker--solo">08 &middot; Contact</span>
+      <span class="kicker mono kicker--solo">10 &middot; Contact</span>
       <h2 class="contact__title">Let's build something<br />that <em>ships.</em></h2>
       <p class="contact__sub">Open to Data Scientist, Data Analyst, AI Engineer and ML/NLP roles in Copenhagen and beyond. Feel free to reach out; I usually reply within a day.</p>
       <div class="contact__actions">
