@@ -269,6 +269,7 @@ a:focus-visible, button:focus-visible{
   color: var(--accent); padding-bottom: 6px;
 }
 .chapter-noir .kicker{ color: var(--accent-bright); }
+#beyond{ --accent: #BE185D; }
 .sec-title{
   font-family: var(--serif); font-weight:600; letter-spacing:-0.015em;
   font-size: clamp(2.2rem, 5vw, 3.8rem); line-height:1.05;
