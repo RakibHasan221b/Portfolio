@@ -123,23 +123,35 @@ figure figcaption{
   will-change: transform;
 }
 .btn--solid{
-  background: linear-gradient(to bottom right, #9333EA, #2563EB);
-  color:#fff; border-radius:6px;
-  box-shadow: -5px -5px 50px 0 rgba(147,51,234,0.31), 5px 5px 50px 0 rgba(37,99,235,0.31);
+  background: linear-gradient(var(--noir), var(--noir)) padding-box,
+              linear-gradient(135deg, #9333EA, #2563EB) border-box;
+  border: 1px solid transparent;
+  color: var(--ivory); border-radius:6px;
+  box-shadow: -5px -5px 40px 0 rgba(147,51,234,0.18), 5px 5px 40px 0 rgba(37,99,235,0.18);
   transition: background .3s var(--ease-out), color .3s var(--ease-out),
               box-shadow .3s var(--ease-out), transform .3s var(--ease-out);
 }
-.btn--solid:hover{ background: var(--ivory); color: var(--noir); box-shadow:none; }
+.btn--solid:hover{
+  background: linear-gradient(135deg, #9333EA, #2563EB);
+  color:#fff;
+  box-shadow: -5px -5px 55px 0 rgba(147,51,234,0.35), 5px 5px 55px 0 rgba(37,99,235,0.35);
+}
 .btn--line{ border-color: rgba(255,255,255,0.565); border-radius:5px; color: var(--ivory); }
 .btn--line:hover{ border-color: var(--ivory); background: var(--ivory); color: var(--noir); }
 .btn--solid-ivory{
-  background: linear-gradient(to bottom right, #9333EA, #2563EB);
-  color:#fff; border-radius:6px;
-  box-shadow: -5px -5px 50px 0 rgba(147,51,234,0.31), 5px 5px 50px 0 rgba(37,99,235,0.31);
+  background: linear-gradient(var(--noir), var(--noir)) padding-box,
+              linear-gradient(135deg, #9333EA, #2563EB) border-box;
+  border: 1px solid transparent;
+  color: var(--ivory); border-radius:6px;
+  box-shadow: -5px -5px 40px 0 rgba(147,51,234,0.18), 5px 5px 40px 0 rgba(37,99,235,0.18);
   transition: background .3s var(--ease-out), color .3s var(--ease-out),
               box-shadow .3s var(--ease-out), transform .3s var(--ease-out);
 }
-.btn--solid-ivory:hover{ background: var(--ivory); color: var(--noir); box-shadow:none; }
+.btn--solid-ivory:hover{
+  background: linear-gradient(135deg, #9333EA, #2563EB);
+  color:#fff;
+  box-shadow: -5px -5px 55px 0 rgba(147,51,234,0.35), 5px 5px 55px 0 rgba(37,99,235,0.35);
+}
 .btn--line-ivory{ border-color: rgba(244,240,230,0.35); color: var(--ivory); background:none; border-radius:5px; }
 .btn--line-ivory:hover{ border-color: var(--ivory); background: var(--ivory); color: var(--noir); }
 
